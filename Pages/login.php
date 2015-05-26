@@ -1,3 +1,4 @@
+<?php include_once "../control/setupSentry.php"; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,17 @@
 	<nav>
 		<ul>
 			<li><a href="../index.php" title="">Home</a></li>
-			<li><a href="register.php" title="">Register</a></li>
+			<!--Check User is logged in-->
+			<?php if(Sentry::check()) {?>
+
+				<li><a href="profile.php" title="">Profile</a></li>
+				<li><a href="../control/logout.php" title="">Logout</a></li>
+
+			<?php }else{ ?>	
+
+				<li><a href="register.php" title="">Register</a></li>
+
+			<?php } ?>
 		</ul>
 	</nav>
 
@@ -31,6 +42,8 @@
 		<input type="text" name="FB_id" value="" placeholder="Facebook ID" required="required">
 		<input type="submit" name="submit_FB" value="Log in">
 	</form>
+
+	<?php var_dump(Sentry::getUser()); ?>
 
 </body>
 </html>
