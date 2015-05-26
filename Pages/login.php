@@ -16,19 +16,20 @@
 
 	<nav>
 		<ul>
-			<li><a href="index.php" title="">Home</a></li>
+			<li><a href="../index.php" title="">Home</a></li>
 			<li><a href="register.php" title="">Register</a></li>
 		</ul>
 	</nav>
 
-	<form action="../Authen/login.php" method="post">
+	<form action="../control/login.php" method="post">
 		<input type="text" name="screen_name" value="" placeholder="Screen Name" required="required">
 		<input type="password" name="password" value="" placeholder="Password" required="required">
-		<input type="submit" name="" value="Log in">
+		<input type="submit" name="submit_SN" value="Log in">
 	</form>
 	<br>
-	<form action="../Authen/login.php" method="post">
+	<form action="../control/login.php" method="post">
 		<input type="text" name="FB_id" value="" placeholder="Facebook ID" required="required">
+		<input type="submit" name="submit_FB" value="Log in">
 	</form>
 
 </body>

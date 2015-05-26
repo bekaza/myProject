@@ -12,8 +12,8 @@
 	<h1 class="text-center">Home Page</h1>
 	<nav>
 		<ul>
-			<li><a href="login.php" title="">Log in</a></li>
-			<li><a href="register.php" title="">Register</a></li>
+			<li><a href="Pages/login.php" title="">Log in</a></li>
+			<li><a href="Pages/register.php" title="">Register</a></li>
 		</ul>
 	</nav>
 </body>
