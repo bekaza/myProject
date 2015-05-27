@@ -43,7 +43,5 @@
 		<input type="submit" name="submit_FB" value="Log in">
 	</form>
 
-	<?php var_dump(Sentry::getUser()); ?>
-
 </body>
 </html>

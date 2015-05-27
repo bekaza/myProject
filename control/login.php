@@ -3,24 +3,64 @@
 include_once "setupSentry.php";
 include_once "token.php";
 
-// Create Object Singleton Token
-$obj_token = SingletonToken::getInstance();
+// function PDO connect DB
+function connectDB_FindUserIDbyFBID($fb_id)
+{
+	// prepare database connection variables
+	$db_host = 'localhost';
+	$db_name = 'appdata';
+	$db_user = 'root';
+	$db_pass = 'root';
+	 
+	// connect
+	try {
+	    // If you change db server system, change this too!
+	    $conn = new PDO("mysql:host=$db_host; dbname=$db_name", $db_user, $db_pass);
+
+	    $feild = ["id","screen_name"];
+
+	    $term = array(
+	    	//'feild' 	=> "id",
+	        'fb_id'   	=> $fb_id,
+	    );
+	     
+	    // prepare query
+	    $result = $conn->prepare("SELECT ".$feild[0]." FROM users WHERE FB_id=:fb_id");
+	     
+	    // bind statement and query it
+	    $result->execute($term);
+
+	    if ($result !== false) 
+	    {            
+	        $row = $result->fetch();
+	        return $row['id'];
+	    }else{
+	    	return null;
+	    }
+	}
+	catch (PDOException $e) 
+	{
+	    echo $e->getMessage();
+	}
+}
 
 
 
 // Check Submit Form
-if (isset($_POST['submit_SN']) !== null){
-
+if (isset($_POST['submit_SN']) || isset($_POST['submit_FB']))
+{
 	$error_msg = "";
 	$username = "";
 	// Check log in Facebook
-	if(isset($_POST['FB_id']) && $_POST['FB_id'] !== ""){
-		echo "Facebook";
+	if(isset($_POST['FB_id']) && $_POST['FB_id'] !== "")
+	{
+
 		$fb_id = filter_var($_POST['FB_id'],FILTER_SANITIZE_NUMBER_INT);
 		
 		$user_id = connectDB_FindUserIDbyFBID($fb_id);
 
-		if($user_id !== null){
+		if($user_id !== null)
+		{
 			try
 			{
 				$user = Sentry::findUserById($user_id);
@@ -123,45 +163,8 @@ if (isset($_POST['submit_SN']) !== null){
 	print_r($result);
 }else{
 	//header("Location: ../Pages/login.php");
-	echo "No submit";
-	die();
+	die("No submit !!!");
 }
-
-// function PDO connect DB
-function connectDB_FindUserbyFBID($fb_id){
-	// prepare database connection variables
-	$db_host = 'localhost';
-	$db_name = 'appdata';
-	$db_user = 'root';
-	$db_pass = 'root';
-	 
-	// connect
-	try {
-	    // If you change db server system, change this too!
-	    $conn = new PDO("mysql:host=$db_host; dbname=$db_name", $db_user, $db_pass);
-
-	    $term = array(
-	        'fb_id'   => $fb_id,
-	    );
-	     
-	    // prepare query
-	    $result = $conn->prepare("SELECT id, password FROM users WHERE FB_id=:fb_id");
-	     
-	    // bind statement and query it
-	    $result->execute($term);
-	    
-	    if ($result !== false) {            
-	        $row = $result->fetch();
-	        return $row['id'];
-	    }else{
-	    	return null;
-	    }
-	}
-	catch (PDOException $e) {
-	    echo $e->getMessage();
-	}
-}
-
 ?>
 <br>
-<a href="../Pages/login.php" title="">Login</a>
+<a href="../Pages/profile.php" title="">Profile</a>

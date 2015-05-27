@@ -77,11 +77,14 @@ class SingletonToken
             	self::$hash = password_hash(self::$key, PASSWORD_BCRYPT, $options);
             	/* Store new hash in db */      	
         	}
-    		return "Yep !!";
+    		return true;
     	}else{
-    		return "Oop !!";
+    		return false;
     	}
     }
 }
+
+// Create Object Singleton Token
+$obj_token = SingletonToken::getInstance();
 
 ?>
