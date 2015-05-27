@@ -32,14 +32,14 @@
 		<input type="text" name="first_name" value="" placeholder="First Name"><br>
 		<input type="text" name="last_name" value="" placeholder="Last Name"><br>
 		<input type="email" name="email" value="" placeholder="E - mail" required="required">*<br>
-		<input type="submit" name="" value="Create Account">
+		<input type="submit" name="submit_SN" value="Create Account">
 	</form>
 	<br>
 
 	<form action="../control/register.php" method="post">
 		<p>User facebook</p>
 		<input type="text" name="FB_id" value="" placeholder="Facebook ID" required="required">
-		<input type="submit" name="" value="Create Account">
+		<input type="submit" name="submit_FB" value="Create Account">
 	</form>
 
 </body>
