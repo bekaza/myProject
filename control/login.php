@@ -1,4 +1,5 @@
 <?php
+
 // Setup File
 include_once "setupSentry.php";
 include_once "token.php";

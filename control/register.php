@@ -3,8 +3,6 @@
 // Setup Sentry
 include_once "setupSentry.php";
 
-$array = ['id','name'];
-
 // Check Submit Register
 if (isset($_POST['submit_SN']) || isset($_POST['submit_FB']))
 {
